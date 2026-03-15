@@ -92,33 +92,39 @@ Users can simulate transactions and test fraud behavior without saving the recor
 ## Project Structure
 
 ```text
-FraudGuard-AI/
+Ecommerce-Fraud-Detection-System
 │
 ├── app.py
 ├── train_model.py
 ├── init_db.py
 ├── requirements.txt
-├── README.md
-├── ecommerce_fraud.csv
-├── fraud_pipeline.joblib
-├── fraud_system.db
 │
-├── templates/
+├── model
+│   └── fraud_pipeline.joblib
+│
+├── dataset
+│   └── ecommerce_fraud.csv
+│
+├── templates
 │   ├── base.html
-│   ├── login.html
 │   ├── dashboard.html
+│   ├── login.html
 │   ├── predict.html
 │   ├── upload.html
 │   ├── history.html
-│   ├── cases.html
-│   ├── case_timeline.html
-│   ├── simulate.html
 │   ├── suspicious.html
-│   ├── risk_profiles.html
+│   ├── simulate.html
+│   ├── cases.html
 │   ├── notifications.html
-│   └── otp_verify.html
+│   ├── risk_profiles.html
+│   └── case_timeline.html
 │
-├── static/
+├── static
 │   └── style.css
 │
-└── uploads/
+├── screenshots
+│   ├── screenshot1.png
+│   ├── screenshot2.png
+│   ├── screenshot3.png
+│
+└── README.md
