@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% block title %}Manual Prediction{% endblock %}
+
+{% block content %}
+<div class="card">
+    <h2>Manual Transaction Prediction</h2>
+
+    <form method="POST" class="form-grid">
+        <div>
+            <label>Customer Ref</label>
+            <input type="text" name="customer_ref">
+        </div>
+        <div>
+            <label>Purchase Value</label>
+            <input type="number" step="0.01" name="purchase_value" required>
+        </div>
+        <div>
+            <label>Age</label>
+            <input type="number" name="age" required>
+        </div>
+        <div>
+            <label>Signup Time</label>
+            <input type="datetime-local" name="signup_time" required>
+        </div>
+        <div>
+            <label>Purchase Time</label>
+            <input type="datetime-local" name="purchase_time" required>
+        </div>
+        <div class="full-width">
+            <button type="submit">Predict Fraud</button>
+        </div>
+    </form>
+</div>
+
+{% if result %}
+<div class="card">
+    <h2>Prediction Result</h2>
+    <p><strong>Transaction ID:</strong> {{ result.transaction_id }}</p>
+    <p><strong>Status:</strong> {{ result.prediction }}</p>
+    <p><strong>Final Fraud Probability:</strong> {{ result.fraud_probability }}%</p>
+    <p><strong>ML Score:</strong> {{ result.ml_probability }}%</p>
+    <p><strong>Rule Score:</strong> {{ result.rule_score }}%</p>
+    <p><strong>Confidence:</strong> {{ result.confidence_band }}</p>
+    <p><strong>Risk Level:</strong> {{ result.risk_level }}</p>
+    <p><strong>Recommended Action:</strong> {{ result.action }}</p>
+    <p><strong>Duplicate Flag:</strong> {{ result.duplicate_flag }}</p>
+    <p><strong>Reasons:</strong> {{ result.suspicious_reasons }}</p>
+
+    {% if result.otp_code %}
+    <p><strong>Generated OTP:</strong> {{ result.otp_code }}</p>
+    <a class="btn-inline" href="{{ url_for('otp_verify', transaction_id=result.transaction_id) }}">Verify OTP</a>
+    {% endif %}
+</div>
+{% endif %}
+{% endblock %}

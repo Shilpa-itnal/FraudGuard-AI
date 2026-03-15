@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+{% block title %}Cases{% endblock %}
+
+{% block content %}
+<div class="card">
+    <h2>Case Management</h2>
+
+    <div class="table-wrap">
+        <table>
+            <thead>
+                <tr>
+                    <th>Case ID</th>
+                    <th>Transaction ID</th>
+                    <th>Customer Ref</th>
+                    <th>Probability %</th>
+                    <th>Risk</th>
+                    <th>Action</th>
+                    <th>Status</th>
+                    <th>Assigned To</th>
+                    <th>Notes</th>
+                    <th>Timeline</th>
+                    <th>Update</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in rows %}
+                <tr>
+                    <td>{{ row.id }}</td>
+                    <td>{{ row.transaction_id }}</td>
+                    <td>{{ row.customer_ref }}</td>
+                    <td>{{ row.fraud_probability }}</td>
+                    <td>{{ row.risk_level }}</td>
+                    <td>{{ row.action_recommendation }}</td>
+                    <td>{{ row.status }}</td>
+                    <td>{{ row.assigned_to }}</td>
+                    <td>{{ row.notes }}</td>
+                    <td><a class="btn-inline" href="{{ url_for('case_timeline', case_id=row.id) }}">Open</a></td>
+                    <td>
+                        <form method="POST">
+                            <input type="hidden" name="action_type" value="update_case">
+                            <input type="hidden" name="case_id" value="{{ row.id }}">
+                            <select name="status">
+                                <option value="Pending">Pending</option>
+                                <option value="Under Review">Under Review</option>
+                                <option value="Confirmed Fraud">Confirmed Fraud</option>
+                                <option value="False Positive">False Positive</option>
+                                <option value="Closed">Closed</option>
+                            </select>
+                            <select name="assigned_to">
+                                {% for analyst in analysts %}
+                                <option value="{{ analyst.username }}">{{ analyst.username }}</option>
+                                {% endfor %}
+                            </select>
+                            <input type="text" name="notes" placeholder="Case notes">
+                            <button type="submit">Update</button>
+                        </form>
+
+                        <form method="POST" style="margin-top:10px;">
+                            <input type="hidden" name="action_type" value="add_note">
+                            <input type="hidden" name="case_id" value="{{ row.id }}">
+                            <input type="text" name="note_text" placeholder="Add timeline note">
+                            <button type="submit">Add Note</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

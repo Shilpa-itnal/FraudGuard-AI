@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block title %}Case Timeline{% endblock %}
+
+{% block content %}
+<div class="card">
+    <h2>Case Timeline</h2>
+    <p><strong>Case ID:</strong> {{ case_row.id }}</p>
+    <p><strong>Transaction ID:</strong> {{ case_row.transaction_id }}</p>
+    <p><strong>Status:</strong> {{ case_row.status }}</p>
+    <p><strong>Assigned To:</strong> {{ case_row.assigned_to }}</p>
+    <p><strong>Main Notes:</strong> {{ case_row.notes }}</p>
+</div>
+
+<div class="card">
+    <h3>Timeline Notes</h3>
+    <div class="table-wrap">
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Note</th>
+                    <th>Added By</th>
+                    <th>Created</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in notes %}
+                <tr>
+                    <td>{{ row.id }}</td>
+                    <td>{{ row.note_text }}</td>
+                    <td>{{ row.added_by }}</td>
+                    <td>{{ row.created_at }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

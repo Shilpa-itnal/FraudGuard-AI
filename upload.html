@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+{% block title %}CSV Upload{% endblock %}
+
+{% block content %}
+<div class="card">
+    <h2>Upload CSV for Fraud Detection</h2>
+    <form method="POST" enctype="multipart/form-data">
+        <input type="file" name="file" accept=".csv" required>
+        <button type="submit">Upload and Predict</button>
+    </form>
+</div>
+
+{% if summary %}
+<div class="grid">
+    <div class="card stat-card">
+        <h3>Total</h3>
+        <p>{{ summary.total }}</p>
+    </div>
+    <div class="card stat-card">
+        <h3>Fraud</h3>
+        <p>{{ summary.fraud }}</p>
+    </div>
+    <div class="card stat-card">
+        <h3>Review</h3>
+        <p>{{ summary.review }}</p>
+    </div>
+    <div class="card stat-card">
+        <h3>Blocked</h3>
+        <p>{{ summary.blocked }}</p>
+    </div>
+</div>
+
+<div class="card">
+    <h3>Fraud Rate</h3>
+    <p class="big-text">{{ summary.fraud_rate }}%</p>
+</div>
+{% endif %}
+
+{% if results %}
+<div class="card">
+    <h2>Prediction Results</h2>
+    <div class="table-wrap">
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Purchase Value</th>
+                    <th>Age</th>
+                    <th>Account Age Hours</th>
+                    <th>Purchase Hour</th>
+                    <th>Probability %</th>
+                    <th>Risk</th>
+                    <th>Action</th>
+                    <th>Prediction</th>
+                    <th>Reasons</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in results %}
+                <tr>
+                    <td>{{ row.transaction_id }}</td>
+                    <td>{{ row.purchase_value }}</td>
+                    <td>{{ row.age }}</td>
+                    <td>{{ row.account_age_hours }}</td>
+                    <td>{{ row.purchase_hour }}</td>
+                    <td>{{ row.fraud_probability }}</td>
+                    <td>{{ row.risk_level }}</td>
+                    <td>{{ row.action_recommendation }}</td>
+                    <td>{{ row.final_prediction }}</td>
+                    <td>{{ row.suspicious_reasons }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endif %}
+{% endblock %}

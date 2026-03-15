@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block title %}Notifications{% endblock %}
+
+{% block content %}
+<div class="card">
+    <h2>Notification Center</h2>
+    <div class="table-wrap">
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Title</th>
+                    <th>Message</th>
+                    <th>Severity</th>
+                    <th>Read</th>
+                    <th>Created</th>
+                    <th>Mark Read</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in rows %}
+                <tr>
+                    <td>{{ row.id }}</td>
+                    <td>{{ row.title }}</td>
+                    <td>{{ row.message }}</td>
+                    <td>{{ row.severity }}</td>
+                    <td>{{ row.is_read }}</td>
+                    <td>{{ row.created_at }}</td>
+                    <td><a class="btn-inline" href="{{ url_for('read_notification', notification_id=row.id) }}">Read</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

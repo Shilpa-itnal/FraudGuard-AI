@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% block title %}History{% endblock %}
+
+{% block content %}
+<div class="card">
+    <h2>Transaction History</h2>
+    <a class="btn-inline" href="{{ url_for('export_history') }}">Export CSV</a>
+
+    <div class="table-wrap">
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Purchase</th>
+                    <th>Age</th>
+                    <th>Probability %</th>
+                    <th>Risk</th>
+                    <th>Action</th>
+                    <th>Prediction</th>
+                    <th>Feedback</th>
+                    <th>Created By</th>
+                    <th>Created At</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in rows %}
+                <tr>
+                    <td>{{ row.id }}</td>
+                    <td>{{ row.purchase_value }}</td>
+                    <td>{{ row.age }}</td>
+                    <td>{{ row.fraud_probability }}</td>
+                    <td>{{ row.risk_level }}</td>
+                    <td>{{ row.action_recommendation }}</td>
+                    <td>
+                        {% if row.final_prediction == 1 %}Fraud{% else %}Legitimate{% endif %}
+                    </td>
+                    <td>
+                        <form method="POST" action="{{ url_for('feedback', transaction_id=row.id) }}">
+                            <select name="feedback_label">
+                                <option value="correct_fraud">Correct Fraud</option>
+                                <option value="false_positive">False Positive</option>
+                                <option value="genuine">Genuine</option>
+                                <option value="needs_review">Needs Review</option>
+                            </select>
+                            <button type="submit">Save</button>
+                        </form>
+                    </td>
+                    <td>{{ row.created_by }}</td>
+                    <td>{{ row.created_at }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

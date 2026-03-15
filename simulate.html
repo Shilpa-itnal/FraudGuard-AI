@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block title %}Fraud Simulation{% endblock %}
+
+{% block content %}
+<div class="card">
+    <h2>Fraud Simulation Mode</h2>
+    <p>Try different values and see how risk changes without saving as a real transaction.</p>
+
+    <form method="POST" class="form-grid">
+        <div>
+            <label>Customer Ref</label>
+            <input type="text" name="customer_ref">
+        </div>
+        <div>
+            <label>Purchase Value</label>
+            <input type="number" step="0.01" name="purchase_value" required>
+        </div>
+        <div>
+            <label>Age</label>
+            <input type="number" name="age" required>
+        </div>
+        <div>
+            <label>Signup Time</label>
+            <input type="datetime-local" name="signup_time" required>
+        </div>
+        <div>
+            <label>Purchase Time</label>
+            <input type="datetime-local" name="purchase_time" required>
+        </div>
+        <div class="full-width">
+            <button type="submit">Run Simulation</button>
+        </div>
+    </form>
+</div>
+
+{% if sim_result %}
+<div class="card">
+    <h2>Simulation Result</h2>
+    <p><strong>ML Score:</strong> {{ sim_result.ml_probability }}%</p>
+    <p><strong>Rule Score:</strong> {{ sim_result.rule_score }}%</p>
+    <p><strong>Final Score:</strong> {{ sim_result.final_probability }}%</p>
+    <p><strong>Confidence:</strong> {{ sim_result.confidence_band }}</p>
+    <p><strong>Risk:</strong> {{ sim_result.risk_level }}</p>
+    <p><strong>Action:</strong> {{ sim_result.action }}</p>
+    <p><strong>Reasons:</strong> {{ sim_result.reasons }}</p>
+</div>
+{% endif %}
+{% endblock %}

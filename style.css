@@ -1,0 +1,164 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f4f7fb;
+    color: #222;
+}
+
+.navbar {
+    background: #1f3c88;
+    color: white;
+    padding: 15px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 18px;
+    margin: 0;
+    padding: 0;
+    flex-wrap: wrap;
+}
+
+.nav-links li a {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.container {
+    width: 92%;
+    max-width: 1300px;
+    margin: 25px auto;
+}
+
+.card {
+    background: white;
+    padding: 22px;
+    border-radius: 14px;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+    margin-bottom: 24px;
+}
+
+.login-card {
+    max-width: 420px;
+    margin: 60px auto;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+}
+
+.stat-card {
+    text-align: center;
+}
+
+.stat-card p {
+    font-size: 28px;
+    font-weight: bold;
+    color: #1f3c88;
+}
+
+.big-text {
+    font-size: 32px;
+    font-weight: bold;
+    color: #1f3c88;
+}
+
+.hero {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-top: 12px;
+    margin-bottom: 6px;
+    font-weight: bold;
+}
+
+input, textarea, select, button {
+    width: 100%;
+    padding: 11px;
+    border: 1px solid #cfcfcf;
+    border-radius: 8px;
+    box-sizing: border-box;
+}
+
+button, .btn-inline {
+    background: #1f3c88;
+    color: white;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    text-align: center;
+    margin-top: 12px;
+    padding: 10px 14px;
+    width: auto;
+}
+
+button:hover, .btn-inline:hover {
+    background: #162d66;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
+}
+
+.full-width {
+    grid-column: 1 / -1;
+}
+
+.alert {
+    padding: 12px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+
+.alert.danger {
+    background: #ffd9d9;
+    color: #8b0000;
+}
+
+.alert.success {
+    background: #d8f5d8;
+    color: #136913;
+}
+
+.result-box p {
+    margin: 8px 0;
+}
+
+.table-wrap {
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 900px;
+}
+
+table th, table td {
+    padding: 12px;
+    border-bottom: 1px solid #ddd;
+    text-align: left;
+    vertical-align: top;
+}
+
+.hint {
+    margin-top: 10px;
+    color: #555;
+}

@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block title %}Risk Profiles{% endblock %}
+
+{% block content %}
+<div class="card">
+    <h2>Customer Risk Profiles</h2>
+    <div class="table-wrap">
+        <table>
+            <thead>
+                <tr>
+                    <th>Customer Ref</th>
+                    <th>Total Transactions</th>
+                    <th>Avg Probability</th>
+                    <th>Fraud Count</th>
+                    <th>Blocked Count</th>
+                    <th>Duplicate Count</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in rows %}
+                <tr>
+                    <td>{{ row.customer_ref }}</td>
+                    <td>{{ row.total_transactions }}</td>
+                    <td>{{ row.avg_probability }}</td>
+                    <td>{{ row.fraud_count }}</td>
+                    <td>{{ row.blocked_count }}</td>
+                    <td>{{ row.duplicate_count }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}
